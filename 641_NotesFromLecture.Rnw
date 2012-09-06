@@ -1,8 +1,124 @@
 \documentclass{article}
+\usepackage[sc]{mathpazo}
+\usepackage{geometry}
+\geometry{verbose,tmargin=2.5cm,bmargin=2.5cm,lmargin=2.5cm,rmargin=2.5cm}
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle, bookmarks=true,bookmarksnumbered=true,bookmarksopen=true,bookmarksopenlevel=2, breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=false] {hyperref}
+\hypersetup{ pdfstartview={XYZ null null 1}}
+\usepackage{breakurl}
+\parindent = 0pt
+\usepackage{amsfonts}
 
+\usepackage{framed, color}
+\definecolor{shadecolor}{RGB}{211, 211, 211}
+
+\def\be{\begin{enumerate}}
+\def\ee{\end{enumerate}}
+\def\vh{\vskip0mm\hskip9mm}
+\def\vn{\vskip0mm}
+\def\vvn{\vskip0mm\noindent}
+\def\vnn{\vskip0mm\noindent}
+\def\h{\hskip4mm}
+\def\bul{$\bullet$}
 \begin{document}
+\section*{Lecture 1}
+\section*{Lecture 2}
+\section*{Lecture 3}
+\subsection*{Intro}
+Added page to syllabus: Supplemental references.
 
+TODO: Check if categorical data analysis will help for fitting surgery duration models.
 
+Want information from a population. Take a sample from this population; use this subset to make statements about the whole population.
 
+\subsection*{Two types of studies}
+Can characterize as no treatment vs. treatment:
+\begin{description}
+  \item[Observational Study] Passive participation of researcher.  Polling, production records, etc. (just the data)
+  \item[Experimental Study] Clinical trials (better than control?), lab study, ag field trials (vs. greenhouse; e.g., level of control)
+\end{description}
+
+\subsection*{Wikipedia}
+\subsubsection*{Observational study}
+ In epidemiology and statistics, an observational study draws inferences about the possible effect of a treatment on subjects, where the assignment of subjects into a treated group versus a control group is outside the control of the investigator. This is in contrast with experiments, such as randomized controlled trials, where each subject is randomly assigned to a treated group or a control group before the start of the treatment.
+\subsubsection*{Controlled Experiment}
+ A controlled experiment generally compares the results obtained from an experimental sample against a control sample, which is practically identical to the experimental sample except for the one aspect whose effect is being tested (the independent variable). A good example would be a drug trial. The sample or group receiving the drug would be the experimental one (treatment group); and the one receiving the placebo would be the control one.
+\subsubsection*{Longitudinal Study}
+ A longitudinal study is a correlational research study that involves repeated observations of the same variables over long periods of time — often many decades. It is a type of observational study. Longitudinal studies are often used in psychology to study developmental trends across the life span, and in sociology to study life events throughout lifetimes or generations. The reason for this is that unlike cross-sectional studies, in which different individuals with same characteristics are compared.
+Longitudinal studies track the same people, and therefore the differences observed in those people are less likely to be the result of cultural differences across generations. Because of this benefit, longitudinal studies make observing changes more accurate, and they are applied in various other fields. In medicine, the design is used to uncover predictors of certain diseases. In advertising, the design is used to identify the changes that advertising has produced in the attitudes and behaviors of those within the target audience who have seen the advertising campaign.
+
+Types of longitudinal studies include cohort studies and panel studies. Cohort studies sample a cohort, defined as a group experiencing some event (typically birth) in a selected time period, and studying them at intervals through time. Panel studies sample a cross-section, and survey it at (usually regular) intervals.
+\subsubsection*{Cohort Study}
+ A cohort study or panel study is a form of longitudinal study (a type of observational study) used in medicine, social science, actuarial science, and ecology. It is an analysis of risk factors and follows a group of people who do not have the disease, and uses correlations to determine the absolute risk of subject contraction. It is one type of clinical study design and should be compared with a cross-sectional study. Cohort studies are largely about the life histories of segments of populations, and the individual people who constitute these segments.
+
+A cohort is a group of people who share a common characteristic or experience within a defined period (e.g., are born, are exposed to a drug or vaccine or pollutant, or undergo a certain medical procedure).
+
+Two examples of cohort studies that have been going on for more than 50 years are the Framingham Heart Study and the National Child Development Study (NCDS), the most widely-researched of the British birth cohort studies.
+\subsubsection*{Prospective cohort study}
+ A prospective cohort study is a cohort study that follows over time a group of similar individuals (cohorts) who differ with respect to certain factors under study, to determine how these factors affect rates of a certain outcome. For example, one might follow a cohort of middle-aged truck drivers who vary in terms of smoking habits, to test the hypothesis that the 20-year incidence rate of lung cancer will be highest among heavy smokers, followed by moderate smokers, and then nonsmokers.
+The prospective study is important for research on the etiology (causation) of diseases and disorders in humans because for ethical reasons people cannot be deliberately exposed to suspected risk factors in controlled experiments.
+Prospective cohort studies are typically ranked higher in the hierarchy of evidence than retrospective cohort studies.
+It can be more expensive than a case–control study.
+One of the advantages of prospective cohort studies is they can help determine risk factors for being infected with a new disease because they are a longitudinal observation over time, and the collection of results is at regular time intervals, so recall error is minimized.
+\subsubsection*{Retrospective cohort study}
+ A retrospective cohort study, also called a historic cohort study, (from Latin retr, "look back") generally means to take a look back at events that already have taken place. For example, the term is used in medicine, describing a look back at a patient's medical history or lifestyle. Retrospective cohort studies have existed for approximately as long as prospective cohort studies.
+
+It is a medical research study in which the medical records of groups of individuals who are alike in many ways but differ by a certain characteristic (for example, female nurses who smoke and those who do not smoke) are compared for a particular outcome (such as lung cancer). In retrospective cohort studies, a risk ratio or odds ratio gives an assessment of relative risk.
+In the case of a retrospective cohort study, the investigator collects data from past records and does not follow patients up as is the case with a prospective study. However, the starting point of this study is the same as for all cohort studies. The first objective is still to establish two groups - exposed versus non-exposed; and these groups are followed up in the ensuing time period.
+In a nutshell, in Retrospective Cohort Study, all the events - exposure, latent period, and subsequent outcome (ex. development of disease) have already occurred in the past. We merely collect the data now, and establish the risk of developing a disease if exposed to a particular risk factor. On the other hand, Prospective Cohort Study is conducted by starting with two groups at the current point, and following up in future for occurrence of disease, if any.
+It is important to understand that the methodology of prospective and retrospective cohort studies is fundamentally the same, but the retrospective study is performed post-hoc, as the cohort is followed retrospectively. The time to complete a retrospective study is only as long as it takes to collect and interpret the data. Retrospective studies examine possible risk and protection variables in relation to a result that is already established at the start of the study.
+Caution needs to be exercised in particular with retrospective cohort studies because errors due to confounding and bias are more common in retrospective studies than in prospective studies.
+\subsubsection*{Case-control study}
+ A case-control study is a type of study design used widely, often in epidemiology. It is a type of observational study in which two existing groups differing in outcome are identified and compared on the basis of some supposed causal attribute. Case-control studies are often used to identify factors that may contribute to a medical condition by comparing subjects who have that condition/disease (the 'cases') with patients who do not have the condition/disease but are otherwise similar (the 'controls').[1] They require less resources but provide less evidence than a randomized controlled trial.
+
+For example, in a study trying to show that people who smoke (the attribute) are more likely to be diagnosed with lung cancer (the exposure), the cases would be persons with lung cancer, the controls would be persons without lung cancer (not necessarily healthy), and some of each group would be smokers. If a larger proportion of the cases smoke than the controls, that suggests, but does not conclusively show, that the hypothesis is valid.
+\subsubsection*{Cross-sectional study}
+ Cross-sectional studies (also known as cross-sectional analyses, transversal studies, prevalence study) form a class of research methods that involve observation of all of a population, or a representative subset, at one specific point in time. They differ from case-control studies in that they aim to provide data on the entire population under study, whereas case-control studies typically include only individuals with a specific characteristic, with a sample, often a tiny minority, of the rest of the population. Cross-sectional studies are descriptive studies (neither longitudinal nor experimental). Unlike case-control studies, they can be used to describe, not only the Odds ratio, but also absolute risks and relative risks from prevalences (sometimes called prevalence risk ratio, or PRR). They may be used to describe some feature of the population, such as prevalence of an illness, or they may support inferences of cause and effect. Longitudinal studies differ from both in making a series of observations more than once on members of the study population over a period of time.
+
+\subsection*{Types of observational studies}
+\begin{description}
+  \item[Sample survey] Glimpse of pop. at given point in time. Poll.
+  \item[Prospective study] Observe pop. right now; follow into future. Example: Does Headstart have affect? Problem: control for other affective factors.
+  \item[Retrospective study] Instead of forward, now look back. Example: diet of those with andwithout colon cancer.
+  \item[Cross-sectional study] 
+\end{description}
+
+\subsection*{Unemployment}
+Difficult to determine, but population definition is difficult.
+\subsection*{Retrospective vs. Prospective}
+Retrospective cheaper; propsectives are long-term. Retro: no control over confounding variables. Prospective: some control. Retro: recall error/bias.
+
+\subsection*{Cohort} disease/no disease? commit crime or not? PhD or not?
+
+\subsection*{Case-control} two groups ---one with disease, the other without. Goal is to identify risk factors associated with disease.
+
+\subsection*{Sampling Error} Compare the teaching technique: online vs. old-style. But population is smll (stats students). Not valid to epand to larger population.
+
+Sampling Error: diff in info btwn pop and samp. Sampling eror can be eliminated by taking a census; however, other errors still remain, non-sampling errors.  These are systematic deviations of the smaple estimates from the true pop values.
+
+Types of non-smapling errors:
+\begin{description}
+  \item[measurement bias] Device always records values too high; poorly worded questionnaires 
+  \item[selection bias] Those who choose to participate in a survey may be completely different subset of the population than this who do participate.
+  \item[sample selection bias] Cell phone only houses can be excluded
+  \item[response bias] personal questions may elicit untruthful answers. 
+  \item[non-response bias] doesn't respond. field study analaogy is missing data.
+\end{description}
+Key point in election polling: get people who are going to vote.
+\subsection*{Sampling frame} A list that contains name/identifier of every memeber of the population.
+
+Then can define all possible subsets, assign a probability to each of these samples, which is the chance that this particular sample will be chosen. This is {\sl probability sampling.}
+
+In this way, we can know the the degree of reliability between sampling estimates and true values.
+
+\subsection*{Non-probability sampling}
+Convenience sampling: select based on availability.
+
+Judgemental sample: expert selects participants. Expert may have agenda or bias.
+
+\subsection*{Simple Random Sampling}
+Let $N$ be the number in the population, and sample $n$ units from this population.  In SRS, there are $N \choose n$ possible samples, each with equal probability of being chosen.
 
 \end{document}
