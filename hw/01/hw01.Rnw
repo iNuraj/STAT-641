@@ -23,7 +23,17 @@
 \def\h{\hskip4mm}
 \def\bul{$\bullet$}
 \begin{document}
+<<setup, include=FALSE, cache=FALSE>>=
+# this is equivalent to \SweaveOpts{...}
+library(ggplot2)
+library(knitr)
+library(plyr)
+opts_chunk$set(fig.path='figure/', fig.align='center', fig.show='hold', cache=TRUE)
+options(replace.assign=TRUE,width=90)
+@
+
 \begin{center}
+{\bf Mike Lederle --- 521002040 --- lederle@neo.tamu.edu}\\[5pt]
 {\bf STATISTICS 641 - ASSIGNMENT \#1 - Due Noon (CDT) Friday - 9/7/12}
 \end{center}
 \vskip0mm\noindent
@@ -53,14 +63,20 @@ being a causal relationship between the  explanatory and response variables.
 \be
 \item[\bul] {\bf Study 1:}\ To evaluate potential health problems arising from discharges from a chemical disposal plant into the groundwater, people living near the plant with major health problems associated with the discharges (bladder cancer, intestinal disorders, etc.) were matched with people of the same age who did not have such health problem but lived near the disposal plant. Both groups were then asked if they drank water from their personal well or used bottled water.
 \begin{shaded}
-Observational. Descriptive.
+Observational. Comparative. Response $=$ health problem (binary). Explanatory $=$ type of water.
 \end{shaded}
 \item[\bul] {\bf Study 2:}\ In order to assess which method was more effective in soliciting contributions for their annual fund raising campaign, a non-profit organization contacted 50\% of their previous contributors by telephone and 50\% by personal contact from an administrator of the organization. The amount of money raised from each person contacted was used to determine the superior method of fund raising.
 \begin{shaded}
-Observational. Descriptive.
+Observational. Descriptive. 
 \end{shaded}
 \item[\bul] {\bf Study 3:}\ An entomologist randomly selects deer to determine the proportion of deer that have ticks that have the potential to transmit Lyme disease.
+\begin{shaded}
+Observational. Descriptive. 
+\end{shaded}
 \item[\bul] {\bf Study 4:}\ A social scientist randomly selects students from a variety of high schools to estimate the proportion of high school students who are frequent marijuana smokers. The researchers also recorded whether the students were classified as being  academically successful or not.
+\begin{shaded}
+Observational. Comparative.  Response $=$ smoker (binary). Explanatory $=$ academics success (binary).
+\end{shaded}
 \ee
 \item[4.]\ ( 12 points)\  Brazos county plans to survey 1000 out of the 60,000 registered voters in the county regarding their preference on the county paying a portion of the building of a new football stadium for Texas A\&M University. A complete alphabetical list of the registered voters is available for selecting the 1000 participants. In each of the following scenarios, identify by name the type of sampling method being used.
     \be
@@ -138,12 +154,83 @@ Operator&Specimen&Run&1     & 2    &Run Mean&Specimen Mean&Operator Mean\\ \hlin
   \be
   \item[a.]    Modify the R code - \underline{chemplotv1.R} given in Handout 1 and in Dostat: Files/RCode, to produce
   a diagram similar to the diagram given in Handout 1.
+<<echo=FALSE>>=
+Res <- c(137.75,
+138.75,
+137.50,
+147.75,
+147.25,
+147.50,
+148.25,
+149.75,
+147.50,
+137.75,
+138.55,
+139.20,
+167.50,
+159.25,
+163.75,
+123.75,
+125.75,
+119.50)
+run = seq(1,18)
+Res.old = c(137.75,138.75,137.50,187.75,137.75,117.75,
+147.75,147.75,147.75,177.75,157.75,107.75,
+167.75,157.75,117.75,177.75,147.75,117.75)
+spec = seq(1,6)
+#postscript("u:/meth1/lectures/chemplot.ps",horizontal=F)
+plot(run,Res,type="p",xlab="Operators",ylab="Chemical Level",
+        main="HW Plot",cex=.99,
+        ylim=c(100,200),xaxt="n")
+rect(0.75,135.5,3.25,141)
+text(1,133,"R1",cex=.55)
+text(2,133,"R2",cex=.55)
+text(3,133,"R3",cex=.55)
+text(2,130,"SPEC1",cex=.75)
+
+rect(3.75,145,6.25,149)
+text(4,142,"R4",cex=.55)
+text(5,142,"R5",cex=.55)
+text(6,142,"R6",cex=.55)
+text(5,139,"SPEC2",cex=.75)
+
+rect(6.75,145,9.25,152)
+text(7,142,"R7",cex=.55)
+text(8,142,"R8",cex=.55)
+text(9,142,"R9",cex=.55)
+text(8,139,"SPEC3",cex=.75)
+
+rect(9.75,136,12.25,141)
+text(10,133,"R10",cex=.55)
+text(11,133,"R11",cex=.55)
+text(12,133,"R12",cex=.55)
+text(11,130,"SPEC4",cex=.75)
+
+rect(12.75,157,15.25,170)
+text(13,154,"R13",cex=.55)
+text(14,154,"R14",cex=.55)
+text(15,154,"R15",cex=.55)
+text(14,151,"SPEC5",cex=.75)
+
+
+rect(15.75,117,18.25,129)
+text(16,114,"R16",cex=.55)
+text(17,114,"R17",cex=.55)
+text(18,114,"R18",cex=.55)
+text(17,111,"SPEC6",cex=.75)
+
+axis(side=1,at=c(3.5,9.5,15.5),
+labels = c("Operator 1","Operator 2","Operator 3"))
+op.avg <- mean(142.75, 143.50, 143.2)
+#segments(0,op.avg,19,op.avg)
+#graphics.off()
+@
 
 \item[b.]  Which of the following sources of variation in the 36 observations do you think has the largest source of variation and which source has the smallest?
 \be
 \item[$\bullet$] Operator - O
-\item[$\bullet$] Specimen within Operator - S(O)
-\item[$\bullet$] Run within Specimen and Operator - R(S,O)
+\item[$\bullet$] Specimen within Operator - S(O) {\sl Most}
+\item[$\bullet$] Run within Specimen and Operator - R(S,O) {\sl Least}
 \item[$\bullet$] Analysis within Run, Specimen, and Operator - A(R,S,O)
 \ee\ee
 \vskip2mm
