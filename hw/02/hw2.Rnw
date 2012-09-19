@@ -1,0 +1,230 @@
+\documentclass{article}
+\usepackage[sc]{mathpazo}
+\usepackage{geometry}
+\geometry{verbose,tmargin=2.5cm,bmargin=2.5cm,lmargin=2.5cm,rmargin=2.5cm}
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle, bookmarks=true,bookmarksnumbered=true,bookmarksopen=true,bookmarksopenlevel=2, breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=false] {hyperref}
+\hypersetup{ pdfstartview={XYZ null null 1}}
+\usepackage{breakurl}
+\parindent = 0pt
+\usepackage{amsfonts}
+
+\usepackage{framed, color}
+\definecolor{shadecolor}{RGB}{211, 211, 211}
+
+\def\be{\begin{enumerate}}
+\def\ee{\end{enumerate}}
+\def\vh{\vskip0mm\hskip9mm}
+\def\vn{\vskip0mm}
+\def\vvn{\vskip0mm\noindent}
+\def\vnn{\vskip0mm\noindent}
+\def\h{\hskip4mm}
+\def\bul{$\bullet$}
+\begin{document}
+<<setup, include=FALSE, cache=FALSE>>=
+# this is equivalent to \SweaveOpts{...}
+library(ggplot2)
+library(knitr)
+library(plyr)
+opts_chunk$set(fig.path='figure/', fig.align='center', fig.show='hold', cache=TRUE)
+options(replace.assign=TRUE,width=90)
+@
+\begin{center}
+{\bf STATISTICS 641 - ASSIGNMENT \#2 - Due Noon, Wednesday - 9/19/12}
+\end{center}
+\vskip0mm\noindent
+\normalsize
+\begin{enumerate}
+\item[\bul] Read Handout 3
+\item[\bul] Read Chapter 2 in the Textbook
+\item[\bul] Hand in the following Problems:
+\vskip2mm\noindent
+\item[( 1.)]\ (10 points)\ \ Assume that the random variable $Y$ has pmf with parameter $p,\ 0<p<1$ :  $$f(y)= \left\{\begin{array}{cl} p(1-p)^y&  \hbox{for}\ \ y=0,1,2,3,\ldots\\ \\ 0&\hbox{otherwise}
+                                                                      \end{array} \right .$$
+\vvn
+\be
+\item[(a.)] Find the cdf, $F(y)$ for $Y$
+\item[(b.)] Find the quantile function, $Q(u)$ for $Y$
+\ee
+\vvn\vvn
+\item[( 2.)]\ (20 points)\ \ Let Y have a 3-parameter Weibull distribution, that is, Y has pdf and cdf in the following form with $\alpha>0,\ \gamma>0,\ \theta>0$:
+\vskip4mm
+\begin{tabular}{cc}
+ $f(y) = \left\{ \begin{array}{cl}\frac{\gamma}{\alpha^{\gamma}} (y-\theta)^{\gamma-1}e^{-\left (\frac{y-\theta}{\alpha}\right)^{\gamma}}& \hbox{for}\ \ \ y\ge \theta\\ \\
+ 0&\hbox{for}\ \ \ y<\theta  \end{array} \right .$ &\hskip10mm
+ $F(y)= \left\{\begin{array}{cl} 1-e^{-\left (\frac{y-\theta}{\alpha}\right)^{\gamma}}& \hbox{for}\ \ \ y\ge \theta\\ \\
+  0&\hbox{for}\ \ \ y<\theta  \end{array} \right .$ \\
+  \end{tabular}
+ \normalsize
+\vskip2mm
+\be
+\item[(a.)] Verify that the pair $(\theta,\ \alpha)$ are location-scale parameters for this family of distributions.
+\item[(b.)] Derive  the quantile function for the three parameter Weibull family of distributions.
+\item[(c.)] What is the probability that a random selected value from a Weibull distribution with $\theta=10,\ \gamma=2$ and $\alpha=25$ has value greater than 30?
+\item[(d.)] Compute the 40th percentile from a Weibull distribution with with $\theta=10,\ \gamma=2$ and $\alpha=25$.
+\ee
+\vvn\vvn
+\item[( 3.)] (10 points)\ \  An alternative form of the 2-parameter Weibull distribution is given as follows with
+\vskip0mm
+  $\beta>0,\ \gamma>0$
+\vskip4mm
+
+\begin{tabular}{cc}
+ $f(y) = \left\{ \begin{array}{cl}\frac{\gamma}{\beta} y^{\gamma-1}e^{-y^{\gamma}/\beta}& \hbox{for}\ \ \ y\ge 0\\ \\
+ 0&\hbox{for}\ \ \ y< 0  \end{array} \right .$ &\hskip10mm
+ $F(y)= \left\{\begin{array}{cl} 1-e^{-y^{\gamma}/\beta}& \hbox{for}\ \ \ y\ge 0\\ \\
+  0&\hbox{for}\ \ \ y< 0  \end{array} \right .$ \\
+  \end{tabular}
+  \vskip2mm
+ \normalsize
+    \be
+    \item[(a.)] Show that $\beta$ is not a scale parameter for this family of distributions?
+    \item[(b.)] Suggest a function of $\gamma$ and $\beta$ which would be a scale  parameter for this family of distributions.
+    \ee
+    \vvn\vvn
+\item[(4.)] (10 points)\ \   An experiment measures the number of particle emissions from a radioactive substance. The number of emissions has a Poisson distribution with rate $\lambda=.25$ particles per week.
+    \be
+    \item[(a.)] What is the probability of at least 1 emission occurring in a randomly selected week?
+    \item[(b.)]  What is the probability of at least 1 emission occurring in a randomly selected year?
+    \ee
+    \vfill\newpage
+\item[( 5.)] (10 points)\ \  Let $Z_1,\ Z_2,\ Z_3,\ Z_4,\ Z_5,\ Z_6,\ Z_7,\ Z_8$ be independent N(0,1) r.v.'s. Identify the distributions of the following random variables.
+\vvn
+\be
+\item[(a.)]\ $R=Z_1^2+Z_2^2+Z_5^2+Z_6^2.$
+\vvn
+\item[(b.)]\ $W=Z_7/\sqrt{[Z_1^2+Z_2^2+Z_3^2+Z_4^2+Z_5^2+Z_6^2]/6}.$
+\vvn
+\item[(c.)]\  $Y=7 Z_2^2/[Z_1^2+Z_3^2+Z_4^2+Z_5^2+Z_6^2+Z_7^2+Z_8^2].$
+\vvn
+\item[(d.)]\  $T=Z_1/Z_4$.
+\vvn
+\item[(e.)]\  $S=3(Z_2^2+Z_4^2)/[2(Z_1^2+Z_3^2+Z_5^2)]$.
+\ee
+\vskip3mm
+\item[( 6.)] (10 points)\ \      Let  $U=.38$ be a realization from a Uniform on (0,1) distribution.
+\vvn
+Express a single realization from each of the following random variables using just the fact $U=.38$.
+\vvn
+\be
+\item[(a.)] $W$ = Weibull($\gamma$=4,\ $\alpha$=1.5)
+\vvn
+\item[(b.)] $N$ =  NegBin(r=8,\ p=.7)
+\vvn
+\item[(c.)] $B$ = Bin(20,\ .4)
+\vvn
+\item[(d.)] $P$ = Poisson($\lambda$=3)
+\vvn
+\item[(e.)] $U$ = Uniform on (0.3,\ 2.5)
+\ee
+\vskip3mm
+\item[( 7.)] (30 points)\ \   For each of the following situations described below, select the
+ distribution which best models the
+given situation. Provide a short justification for your answer.
+\vvn
+\begin{tabular}{llll}
+Hypergeometric&  Equally Likely  &  Poisson &  Binomial \\
+Geometric     &  Negative Binomial&   Normal&  Uniform  \\
+Gamma         &  Exponential      & Chi-square&   Lognormal\\
+Cauchy        &  Double Exponential&Weibull   &  F  \\
+t             &  Logistic & Beta\\
+\end{tabular}
+\vskip2mm\noindent
+\be
+\item [(a.)] A wildlife biologist is studying if there is a difference between
+  ducks in Texas and Michigan. She measures the wing span of each duck
+  and then computes the difference between this wing span and a
+  standard value for a large population of ducks. These differences are known to have a standard
+normal distribution. A sample of 100 ducks from Texas yield
+  deviations, $T_1, \dots, T_{100}$. The total squared deviation from
+  the standard value, i.e., $TD = \sum\nolimits_{n=1}^{100} T_i^2$,
+is then computed. A similar statistic is computed for Michigan: $MD =
+  \sum\nolimits_{n=1}^{100} M_i^2$. She now wants to compare the ratio
+  $R= \frac{TD}{MD}$ to 1.0. The distribution of R is \underbar{ \ \ \ }?
+\item[(b.)] The Geoscience Department at Stanford monitors
+the occurrences of earthquakes in the Northern Region of California. One of the variables
+of
+interest to the researchers is the length of time T between the occurrence of
+major earthquakes. The distribution of T is \underbar{ \ \ \ \ \ \ }?
+\item[(c.)] A quality control engineer measures the difference D
+between the nominal diameter of a 5 cm ball bearing and the true bearing diameter. He finds
+that the bearings are equally likely to have a diameter larger than or smaller than 5 cm.
+Furthermore, 10\% of the bearings have diameters which deviate more than 6 times their scale parameter from 5 cm.
+The distribution of D is \underbar{ \ \ \ \ \ \ }?
+
+\item[(d.)] In the development of a new treatment for kidney disease
+in domestic cats, 100 cats with kidney problems are placed on the new treatment. The time T until
+the cat no longer has kidney disease is recorded for each of the 100 cats. A plot of the hazard
+rate function yields $h(t) = 3.5t^{.8}$. The distribution of T is \underbar{ \ \ \ \ \ \ }?
+
+\item[(e.)] A manufacturer of computer hard drives ships
+the drives in boxes containing 30 drives. A box of hard drives is inspected by randomly selecting
+6 hard drives from each box and testing the 6 drives for defectiveness.
+Let D be the number of defective hard drives found in a randomly selected box containing
+30 hard drives.
+The distribution of D is \underbar{ \ \ \ \ \ \ }?
+
+\item[(f.)] For each day during a six month period in Stamford, Connecticut, the maximum daily
+ozone reading R was recorded. The  distribution of R is \underbar{ \ \ \ \ \ \ }?
+\item[(g.)] A new type of transistor is in development.
+Using the data from an accelerated life test of the transistor, the failure rate function
+is found to be approximately a cubic function. Let T be the time to failure of the
+transistor. The distribution of T is \underbar{ \ \ \ \ \ \ }?
+
+\item[(h.)] In proof testing of circuit boards, the
+probability that any particular diode will fail is known to be .001. Suppose a particular
+type of circuit board contains 200 diodes. Circuit boards are tested
+and the number N
+of failed diodes are recorded for each circuit board. The distribution of N is \underbar{ \ \ \ \ \ \ }?
+
+\item[(i.)] A manufacture of spark plugs ships the
+plugs in packages of 100 plugs. A package is inspected by randomly selecting
+5 plugs and testing whether or not the plugs are defective. Let N be the number
+of defective plugs in the sample of 5 plugs. The distribution of N is \underbar{ \ \ \ \ \ \ }?
+
+\item [(j.)] The distribution of resistance for resistors
+having a nominal value of 10 ohms is under investigation. An electrical engineer randomly
+selects 73 resistors and measures their resistance. Based on these 73 values, she
+determines that the resistance R of the resistors has the
+following behavior:
+approximately 70\% of resistors have resistance within one standard deviation of 10 ohms,
+ 95\% are
+within two standard deviations, and none of the resistors have resistance greater than
+three standard deviations from 10 ohms. The distribution of R is \underbar{ \ \ \ \ \ \ }?
+
+\item[(k.)] A veterinarian is trying to recruit people
+to place their dogs in a study of the effectiveness of a new drug to control ticks
+on dogs. He needs 50 dogs in order for the study to meet professional standards of
+significance. Let M be the number of people the veterinarian interviews until he
+obtains the required 50 dogs for the study. The distribution of M is \underbar{ \ \ \ \ \ \ }?
+
+\item [(l.)] The wings on an airplane are subject
+to stresses which cause cracks in the surface of the wing. After 1000 hours of flight
+the wing is inspected with an x-ray machine and the number of cracks N
+are recorded. The distribution of N is \underbar{ \ \ \ \ \ \ }?
+\vskip3mm\noindent
+\item [(m.)] Suppose small aircraft arrive at a certain
+airport according to a Poisson process with rate 8 aircraft per hour. For the next
+100 days, the length of time, T,  until the 15th aircraft arrives each
+day is recorded. The distribution of T is \underbar{ \ \ \ \ \ \ }?
+
+\item [(n.)] A manufacturer of piston rings measures the deviation
+of the true diameter from
+the nominal value. This measurement is known to have a standard
+normal distribution. A sample of 10 rings yield deviations, $X_1, \dots, X_{10}$. The total
+squared deviation from the nominal value, i.e., W = $\sum\nolimits_{n=1}^{10} X_i^2$,
+is then computed. The distribution of W is \underbar{ \ \ \ \ \ \ }?
+
+\item [(o.)] A large corporation has
+  thousands of small suppliers of its raw materials. Let D be the
+  proportion of parts in a randomly selected shipment that are
+  defective. The vast majority of suppliers have small values of D
+  but a few suppliers have large values of D. A possible
+  distribution for D is \underbar{ \ \ \ \ \ }?
+\ee
+\ee
+\vfill
+
+\end{document}
