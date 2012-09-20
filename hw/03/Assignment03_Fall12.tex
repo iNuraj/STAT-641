@@ -1,0 +1,232 @@
+% -*- TeX -*- -*- Soft -*-
+\documentclass[10pt]{report}
+\usepackage{epsfig,float}
+\setlength{\topmargin}{-.4in}
+\setlength{\footskip}{.3in}
+\setlength{\oddsidemargin}{-.5in}
+\setlength{\textwidth}{6.8 in}
+\setlength{\textheight}{8.9in}
+%\pagestyle{empty}
+\usepackage{amsfonts}
+\def\be{\begin{enumerate}}
+\def\ee{\end{enumerate}}
+\def\vh{\vskip0mm\hskip9mm}
+\def\vn{\vskip0mm}
+\def\vvn{\vskip0mm\noindent}
+\def\vnn{\vskip0mm\noindent}
+\def\h{\hskip4mm}
+\begin{document}
+\vskip0mm\noindent
+\def\bul{$\bullet$}
+{\large
+\begin{center}
+\centerline{\bf STATISTICS 641 -  ASSIGNMENT 3 }
+\vskip.8in {\bf DUE DATE: NOON (CDT), WEDNESDAY, SEPTEMBER 26, 2012
+}
+\vskip1.5in
+\end{center}
+\vnn
+Name \underbar {
+ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\vskip.8in\vnn
+Email Address \underbar {
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\vskip3.5in
+\vnn
+{\bf Please TYPE your name and email address. Often we have difficulty in reading the handwritten names and email addresses.
+Make this cover sheet the first page of your Solutions.}
+}
+\vfill\newpage
+\begin{center}
+{\bf STATISTICS 641 - ASSIGNMENT \#3 - Due NOON (CDT) Wednesday - 9/26/2012}
+\end{center}
+\vskip0mm\noindent
+\vnn\vnn
+$\bullet$ Read Handouts  4 \& 5, Chapter 2 in the Textbook, and the following sections from Chapter 4 in the Textbook: 4.1, 4.2, and 4.3.4.
+\vskip4mm\vnn
+$\bullet$ Submit for grading the following problems:
+\vskip4mm\vnn
+\be
+\item[I.]\ ( 15 Points)\ \ Let Y have a 3-parameter Weibull distribution, that is, Y has pdf and cdf in the following form with $\alpha>0,\ \gamma>0,\ \theta>0$:
+\vskip4mm
+\begin{tabular}{cc}
+ $f(y) = \left\{ \begin{array}{cl}\frac{\gamma}{\alpha^{\gamma}} (y-\theta)^{\gamma-1}e^{-\left (\frac{y-\theta}{\alpha}\right)^{\gamma}}& \hbox{for}\ \ \ y\ge \theta\\ \\
+ 0&\hbox{for}\ \ \ y<\theta  \end{array} \right .$ &\hskip10mm
+ $F(y)= \left\{\begin{array}{cl} 1-e^{-\left (\frac{y-\theta}{\alpha}\right)^{\gamma}}& \hbox{for}\ \ \ y\ge \theta\\ \\
+  0&\hbox{for}\ \ \ y<\theta  \end{array} \right .$ \\
+  \end{tabular}
+\vskip2mm
+\be
+\item[( a.)] Derive the survival function for $Y$
+\item[( b.)] Derive the hazard function for $Y$
+\ee
+\vskip4mm
+\item[II.]\ ( 15 Points)\ \  A researcher is studying the relative brain weights (brain weight divided by body weight) for 51 species of mammal whose average litter size is less than 2 and for 45 species of mamma whose average litter size is greater than or equal to 2. The researcher was interested in determining what evidence that brain sizes tend to be different for
+    the two groups. (Data from {\it The Statistical Sleuth} by Fred Ramsey and Daniel Schafer).
+The quantile function $Q(u)$ is to be estimated using the 20 data values :
+  \vvn
+  \begin{verbatim}
+                   BRAINSIZE - SMALL LITTER SIZE
+
+   0.42    0.86    0.88    1.11    1.34    1.38    1.42    1.47    1.63
+   1.73    2.17    2.42    2.48    2.74    2.74    2.79    2.90    3.12
+   3.18    3.27    3.30    3.61    3.63    4.13    4.40    5.00    5.20
+   5.59    7.04    7.15    7.25    7.75    8.00    8.84    9.30    9.68
+   10.32   10.41   10.48   11.29   12.30   12.53   12.69   14.14   14.15
+   14.27   14.56   15.84   18.55   19.73   20.00
+
+                   BRAINSIZE - LARGE LITTER SIZE
+
+    0.94    1.26    1.44    1.49    1.63    1.80    2.00    2.00    2.56
+    2.58    3.24    3.39    3.53    3.77    4.36    4.41    4.60    4.67
+    5.39    6.25    7.02    7.89    7.97    8.00    8.28    8.83    8.91
+    8.96    9.92   11.36   12.15   14.40   16.00   18.61   18.75   19.05
+   21.00   21.41   23.27   24.71   25.00   28.75   30.23   35.45   36.35
+  \end{verbatim}
+\vnn
+A software package uses the estimator $\widehat{Q}(u) = Y_{((n-1)u+1)}$ as the estimator of Q(u).
+\item[$\bullet$]\ Calculate the estimates of the  Quartiles:
+of $Q(.25),\ Q(.5),\ Q(.75)$ for just the {\bf Small Litter Size} using the given formula.
+\vvn
+\vfill\newpage
+\item[III.]\ ( 20 points)\ \ Using the data from Problem II for just the {\bf Small Litter Size}, we want to estimate the pdf $f(y)$ for the relative brain weights of the 51 species of mammal.
+  \vnn
+The kernel density estimate of $f(y)$ is given by
+\vn
+$$\widehat{f}(y)=\frac{1}{nh}\sum_{i=1}^{n} K\left (\frac{y-Y_i}{h}\right ),$$
+\vn
+Suppose we use the Gaussian kernel: $K(u) = \frac{1}{\sqrt{2\pi}}e^{-u^2/2}$ and  a bandwidth of $h=3$.
+\be
+\item[( a.)] (11 points)\ \ Estimate $f(3)$ and $f(16)$ using the kernel density estimator.
+\item[( b.)] (3 points)\ \ Using a relative frequency histogram with bin width of 5, estimate the values of $f(3)$ and $f(16)$.
+\item[( c.)] (3 points)\ \ Which  data value provides the smallest contribution to the kernel density estimator at y=16, $\widehat f(16)$?
+\item[( d.)] (2 points) \ \ Which  data value provides the largest contribution to the kernel density estimator at y=16, $\widehat f(16)$?
+\ee
+\vskip5mm
+\item[IV.]\ ( 20 points )\ \  Using the relative Brain Weight data, answer the following questions:
+\be
+\item[( a.)] Produce the following plots of the data: estimates
+of the pdf, cdf, and quantile function for both Small and Large litter sizes.
+\item[( b.)] Describe the underlying distribution of the relative brain weights  for
+both Small and Large litter sizes.
+\item[( c.)] Based on  the graphs, what are your conclusions about the relationship between
+litter size and relative brain weights?
+\ee
+\vskip2mm
+\item[V.]\ ( 30 Points)\ \  {\bf Select} the letter of the {\bf best}
+answer for each question and provide a short explanation for your selection (20 words or less).
+\vskip2mm
+\noindent
+\be
+\item[1.] The function which provides the most detailed description for the realizations of a random variable is
+\be
+\item[A.] the cumulative distribution function, cdf $F(\cdot)$
+\item[B.] the probability density (mass) function, pdf $f(\cdot)$
+\item[C.] the quantile function, $Q(\cdot)$
+\item[D.] the survival function, $S(\cdot)$
+\item[E.] all the above functions are equivalent
+\ee
+\vvn
+\item[2.]  A relative frequency histogram
+having classes of greatly different class widths was used
+as an estimator of a continuous population pdf. The relative frequency
+was plotted versus the class intervals. This plot will not be an appropriate
+estimator of the population pdf because
+\be
+\item[A.] all the intervals are not the same width.
+\item[B.] the area under the curve for each class is not an estimator of the probability of that class.
+\item[C.] the area under the curve is not proportional  to one.
+\item[D.] the relative frequency varies greatly by class width.
+\item[E.] In fact it is an unbiased estimator of the pdf.
+\ee
+\item[3.] A relative frequency histogram
+having classes of greatly different class widths was used
+as an estimator of a continuous population pdf. The relative frequency
+was plotted versus the class intervals. The plot will result in a graphical
+distortion. The plot can be corrected by
+\be
+\item[A.] making all the intervals have the same width.
+\item[B.] increasing the sample size.
+\item[C.] making sure that the area under the curve adds to one
+\item[D.] plotting the relative frequency divided by class width.
+\item[E.] In fact there will not be a distortion since it is an
+unbiased estimator of the pdf.
+\ee
+\vfill\newpage
+\item[4.]   A kernel density estimator  was used
+as an estimator of a continuous population pdf, $f(y)$. The kernel density estimator
+is generally a vastly improved estimator over a relative frequency histogram
+(plot of \vn $\frac{N_i/n}{h_i}$ vs Class $i$) because
+\be
+\item[A.] in using the histogram, it is necessary
+  to select the number of bins, bin widths, and their location.
+\item[B.] the kernel density estimator makes use of all the data in
+  estimating $f(y)$ whereas the histogram only uses those data values
+  in the same bin as $y$.
+\item[C.] the area under the curve adds to 1 for the kernel
+  density estimator.
+\item[D.] there are too many spurious modes using the histogram
+\item[E.] all of the above
+\ee
+\vvn
+\item[5.]      A random sample of n data values is obtained from a process having an absolutely continuous cdf of unknown shape. The metallurgist wants to select the best fitting distribution amongst several candidate cdfs. She decides to select the distribution which has mean and variance most closely matching the corresponding sample mean and variance. The major weakness in this approach is
+\be
+\item[A.] the mean and variance may be highly inflated by outliers
+\item[B.] there are many  distribution having the same mean and variance but very different shapes
+\item[C.] she should have used robust estimators of the location and scale parameters
+\item[D.] the empirical distribution function contains more information about the tails of the distribution than does the mean and variance
+\item[E.] the moments of a distribution determine the distribution, hence
+there is no weakness in the approach
+\ee
+\item[6.] The skewness and kurtosis parameters are generally thought to represent the following characteristics of the population cdf, respectively,
+\be
+\item[A.] the center and spread in the distribution
+\item[B.] the heaviness of the tails and deviation from normality of the distribution
+\item[C.] the deviation from symmetry and concentration in the tails of the distribution
+\item[D.] the deviation from symmetry and concentration in the tails and/or the peakedness of the distribution
+\item[E.] none of the above
+\ee
+\item[7.] The median is a trimmed mean with
+  level of trimming equal to
+\be
+\item[A.] 0\%
+\item[B.] 50\%
+\item[C.] 25\%
+\item[D.] 75\%
+\item[E.] none of the above
+\ee
+\item[8.]  The standard deviation is preferred
+to MAD as a measure of population dispersion when the population
+distribution
+\be
+\item[A.] has absolutely no outliers.
+\item[B.] has a normal distribution.
+\item[C.] has a lognormal distribution.
+\item[D.] has a skewed but short-tailed distribution.
+\item[E.] cannot  be determined with the given information.
+\ee
+\vfill\newpage
+\item[9.]  Alternatives to $\sigma$ for measuring
+  the dispersion in a distribution are $SIQR$ and $MAD$. Which of the
+  following statements about these measures are {\bf TRUE}?
+\be
+\item[A.] All three measures are equal if the pdf for the distribution is symmetric.
+\item[B.] $SIQR$ is preferred to $MAD$ if the distribution has very heavy tails
+\item[C.] For the normal distribution, $SIQR$ is preferred to $MAD$
+\item[D.] all of the above
+\item[E.] none of the above
+\ee
+\item[10.]  A government study of the average monthly nitrate levels in the Mississippi river, $N_t$, just prior to its entry into the Gulf of Mexico is modeled as
+$$N_t = 22.3 + .6 N_{t-1} + e_t\ \hbox{where}\ e_{t}'s \ \hbox{are}\ \hbox{iid}\ E[e_t]=0,\ Var[e_t]=2.8,\ e_t's \ \hbox{are independent of}\ X_t's$$
+The mean and variance of $N_t$ is given by
+\be
+\item[A.] $\mu = 22.3,\ \sigma^2 = 2.8$
+\item[B.]  $\mu = 22.3,\ \sigma^2 = 4.375$
+\item[C.]  $\mu = 34.84,\ \sigma^2 = 2.8$
+\item[D.]  $\mu = 55.75,\ \sigma^2 = 4.375$
+\item[E.] The values of $\mu$ and $\sigma^2$ would change from month to month.
+\ee
+\ee
+\ee
+\vfill
+\end{document}
