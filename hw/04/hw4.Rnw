@@ -1,0 +1,374 @@
+\documentclass{article}
+\usepackage[sc]{mathpazo}
+\usepackage{geometry}
+\geometry{verbose,tmargin=2.5cm,bmargin=2.5cm,lmargin=2.5cm,rmargin=2.5cm}
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle, bookmarks=true,bookmarksnumbered=true,bookmarksopen=true,bookmarksopenlevel=2, breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=false] {hyperref}
+\hypersetup{ pdfstartview={XYZ null null 1}}
+\usepackage{breakurl}
+\parindent = 0pt
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{framed, color}
+\definecolor{shadecolor}{RGB}{211, 211, 211}
+
+\def\be{\begin{enumerate}}
+\def\ee{\end{enumerate}}
+\def\vh{\vskip0mm\hskip9mm}
+\def\vn{\vskip0mm}
+\def\vvn{\vskip0mm\noindent}
+\def\vnn{\vskip0mm\noindent}
+\def\h{\hskip4mm}
+\def\bul{$\bullet$}
+\def\P{\mathrm{Pr}}
+\begin{document}
+<<setup, include=FALSE, cache=FALSE>>=
+# this is equivalent to \SweaveOpts{...}
+library(ggplot2)
+library(knitr)
+library(plyr)
+opts_chunk$set(fig.path='figure/', fig.align='center', fig.show='hold', cache=TRUE)
+options(replace.assign=TRUE,width=90)
+@
+
+\begin{center}
+{\bf MIKE LEDERLE\\ STATISTICS 641 - ASSIGNMENT \#4 - NOON (CDT) Friday - 10/5/2012}
+\end{center}
+\vskip0mm\noindent
+\normalsize
+\vnn\vnn
+$\bullet$ Read Handouts 6 \& 7 and  Chapters 2 \& 4 in the Textbook.
+\vnn\vnn
+$\bullet$ Submit for grading the following problems:
+\vnn\vnn
+I.\ ( 45 points)\ \ A researcher is studying the relative brain weights (brain weight divided by body weight) for 51 species of mammal whose average litter size is less than 2 and for 45 species of mammal whose average litter size is greater than or equal to 2. The researcher was interested in determining what evidence that brain sizes tend to be different for the two groups. (Data from {\it The Statistical Sleuth} by Fred Ramsey and Daniel Schafer).
+  \vvn
+  \begin{verbatim}
+                   RELATIVE BRAIN WEIGHTS - SMALL LITTER SIZE
+
+   0.42    0.86    0.88    1.11    1.34    1.38    1.42    1.47    1.63
+   1.73    2.17    2.42    2.48    2.74    2.74    2.79    2.90    3.12
+   3.18    3.27    3.30    3.61    3.63    4.13    4.40    5.00    5.20
+   5.59    7.04    7.15    7.25    7.75    8.00    8.84    9.30    9.68
+   10.32   10.41   10.48   11.29   12.30   12.53   12.69   14.14   14.15
+   14.27   14.56   15.84   18.55   19.73   20.00
+
+                   RELATIVE BRAIN WEIGHTS - LARGE LITTER SIZE
+
+    0.94    1.26    1.44    1.49    1.63    1.80    2.00    2.00    2.56
+    2.58    3.24    3.39    3.53    3.77    4.36    4.41    4.60    4.67
+    5.39    6.25    7.02    7.89    7.97    8.00    8.28    8.83    8.91
+    8.96    9.92   11.36   12.15   14.40   16.00   18.61   18.75   19.05
+   21.00   21.41   23.27   24.71   25.00   28.75   30.23   35.45   36.35
+  \end{verbatim}
+\vvn
+\be
+\item[1.] For the Large Litter Size mammals, Compute a 10\% trimmed mean, and compare it to the untrimmed sample mean. Does this comparison suggest any extreme values in the data?
+\begin{shaded}
+<<>>=
+large <- c(0.94,    1.26,    1.44,    1.49,    1.63,    1.80,    2.00,    2.00,    2.56,    2.58,    3.24,    3.39,    3.53,    3.77,    4.36,    4.41,    4.60,    4.67, 5.39,    6.25,    7.02,    7.89,    7.97,    8.00,    8.28,    8.83,    8.91,  8.96,    9.92,   11.36,   12.15,   14.40,   16.00,   18.61,   18.75,   19.05,  21.00,   21.41,   23.27,   24.71,   25.00,   28.75,   30.23,   35.45,   36.35)
+mean(large, .10)
+mean(large)
+@
+Yes, it suggests there are extreme values, since when we remove the tails,
+we get a value different (12\% different) than the untrimmed mean.
+\end{shaded}
+\item[2.] The researcher suggested a Weibull distribution to model the data for the Large Litter Size mammals. Assuming that the Weibull distribution is an appropriate model for the Large Litter Size data, obtain the MLE estimates of the Weibull parameters for the Large Litter Size data.
+\begin{shaded}
+Can calculate via {\tt MASS} library (as given in notes):
+<<>>=
+library(MASS)
+(f <- fitdistr(large, "weibull"))
+str(f)
+shape <- f$estimate[1]
+scale <- f$estimate[2]
+@
+
+<<include=FALSE>>=
+log.like <- function(samp, gamma, alpha) {
+  n <- length(samp)
+  n * log(gamma) - n * gamma * log(alpha) + (gamma - 1) * sum(log(samp)) - (1/alpha^gamma) * sum(samp^gamma)
+}
+@
+\end{shaded}
+\item[3.] Estimate the probability that a randomly selected mammal with a litter size of 5 will have a relative brain weight  greater than 30.
+\begin{shaded}
+<<>>=
+pweibull(30, shape, scale, lower.tail = FALSE)
+@
+\end{shaded}
+\item[4.] Compare the MLE estimates of $\mu$ and $\sigma$ based on the Weibull model to the distribution-free estimates of  $\mu$ and $\sigma$ for the Large Litter Size data.
+\begin{shaded}
+The weibull mean and standard deviation are
+<<>>=
+mu.weibull <- scale * gamma(1 + 1/shape)
+names(mu.weibull) <- NULL
+mu.weibull
+sigma.weibull <- sqrt(scale^2 * (gamma(1 + 2/shape) - gamma(1 + 1/shape)^2))
+names(sigma.weibull) <- NULL
+sigma.weibull
+@
+The distribution-free estimates are
+<<>>=
+mean(large)
+sd(large)
+@
+\end{shaded}
+\item[5.] Compare the MLE estimates of median and IQR based on the Weibull model to the distribution-free estimates of  median and IQR for the Large Litter Size data.
+\begin{shaded}
+For the weibull model:
+<<>>=
+first.weibull <- qweibull(.25, shape, scale)
+median.weibull <- qweibull(.5, shape, scale)
+third.weibull <- qweibull(.75, shape, scale)
+(IQR.weibull <- third.weibull - first.weibull)
+median.weibull
+@
+\end{shaded}
+Distribution-free estimates:
+\begin{shaded}
+<<>>=
+IQR(large)
+median(large)
+@
+
+\end{shaded}
+\item[6.] Without any assumed model, estimate the mean and standard deviation of the relative brain weights for both Large and Small litter sizes.
+\begin{shaded}
+{\sl NOTE: I am making the assumption that we are going distribution-free
+for the rest of the problem.}
+<<>>=
+small <- c(0.42,    0.86,    0.88,    1.11,    1.34,    1.38,    1.42,    1.47,    1.63,   1.73,    2.17,    2.42,    2.48,    2.74,    2.74,    2.79,    2.90,    3.12,
+   3.18,    3.27,    3.30,    3.61,    3.63,    4.13,    4.40,    5.00,    5.20,
+   5.59,    7.04,  7.15,    7.25,    7.75,    8.00,    8.84,    9.30,    9.68,
+   10.32,   10.41,   10.48,   11.29,   12.30,   12.53,   12.69,   14.14,   14.15,
+   14.27,   14.56,   15.84,   18.55,   19.73,   20.00)
+
+mean(large)
+mean(small)
+sd(large)
+sd(small)
+@
+\end{shaded}
+
+\item[7.] Estimate the median and MAD of the relative brain weights for both Large and Small litter sizes.
+\begin{shaded}
+<<>>=
+MAD <- function(samp) {
+  median(abs(samp - median(samp)))/.6745
+}
+
+median(large)
+MAD(large)
+median(small)
+MAD(small)
+@
+
+\end{shaded}
+\item[8.] Based on your plots from Assignment \#3, which pair of estimates of the center and spread in the two data sets best represents the center and spread in the two populations of relative brain weights?
+\begin{shaded}
+<<out.width='.45\\textwidth'>>=
+plot(density(large,window='g',bw='nrd'),type='l', main="Large")
+plot(density(small,window='g',bw='nrd'),type='l', main="Small")
+@
+Because the data are skewed, use the median \& MAD. 
+\end{shaded}
+\item[9.] Using your answers from the previous three questions, suggest a relationship (if any) between litter size and relative brain weights.
+\begin{shaded}
+Larger litters tend to have larger brain size.
+\end{shaded}
+\ee
+\vvn
+II.\ ( 20 points)\ \  The following data is the monthly average of daily yields of Moody's AAA bonds for the years 1989 to 1993.\\[10pt]
+\vvn\vvn
+\begin{tabular}{l|rrrrrrrrrrrr}
+Year&Jan.&Feb.&Mar.&Apr.&May&June&July&Aug.&Sep.&Oct.&Nov.&Dec.\\\hline
+1989&9.62&9.64&9.80&9.79&9.57&9.10&8.93&8.96&9.01&8.92&8.89&8.96\\
+1990&8.99&9.22&9.37&9.46&9.47&9.26&9.24&9.41&9.56&9.53&9.30&9.05\\
+1991&9.04&8.83&8.93&8.86&8.86&9.01&9.00&8.75&8.61&8.55&8.48&8.31\\
+1992&8.20&8.29&8.35&8.33&8.28&8.22&8.07&7.95&7.92&7.99&8.10&7.98\\
+1993&7.91&7.71&7.58&7.46&7.43&7.33&7.17&6.85&6.66&6.67&6.93&6.90\\
+\end{tabular}\\[10pt]
+\vvn
+The R code {\bf Assignment04ProbII\_2012.R} provided in Files/Homework Assignments will be very useful in this problem.
+\vvn
+\be
+\item[1.] Create a time series plot of the data.
+\begin{shaded}
+<<out.width='.55\\textwidth'>>=
+bond.yield <- 
+c(9.62,9.64,9.80,9.79,9.57,9.10,8.93,8.96,9.01,8.92,8.89,8.96,
+8.99,9.22,9.37,9.46,9.47,9.26,9.24,9.41,9.56,9.53,9.30,9.05,
+9.04,8.83,8.93,8.86,8.86,9.01,9.00,8.75,8.61,8.55,8.48,8.31,
+8.20,8.29,8.35,8.33,8.28,8.22,8.07,7.95,7.92,7.99,8.10,7.98,
+7.91,7.71,7.58,7.46,7.43,7.33,7.17,6.85,6.66,6.67,6.93,6.90)
+bond.ts <- ts(bond.yield, frequency = 12, start = c(1989, 1))
+plot(bond.ts)
+@
+\end{shaded}
+\vfil
+\newpage
+\item[2.] Calculate the values of $\rho_k$, the autocorrelation coefficients.
+What conclusions can you draw?
+\begin{shaded}
+<<out.width='.55\\textwidth'>>=
+bond.acf <- acf(bond.yield, plot = TRUE)
+#str(bond.acf)
+bond.acf$acf
+@
+Conclusion is strong autocorrelation, meaning the data are not random
+when comparing near-adjacent values.
+\end{shaded}
+\item[3.] Does the time series appear to be stationary? That is, do the mean and variance
+appear to remain constant over time.
+\begin{shaded}
+The above {\tt acf} plot indicates non-stationary behavior.
+\end{shaded}
+\ee
+\vvn\vvn\vvn
+III. (20 points)  Twenty-five patients diagnosed with rare skin disease are randomly assigned to two drug treatments. The following
+times are either the time in days from the point of randomization to either a complete recovery or censoring (as indicated by
+the status variable: 0 means censored, i.e., time at which patient left study prior to a complete recovery, 1 means patient's time to recovery).\\[10pt]
+\vvn
+\footnotesize
+\begin{tabular}{l|ccccccccccccc}\hline
+&\multicolumn{12}{|c}{Treatment 1}\\ \hline
+Time  &180&632&2240&195&76&70&13&1990&18&700&210&1296&23\\
+Status&1  &1  &1   &1  &1 &1 &0 &0   &1 &1  &1  &1   &1\\\hline\hline
+&\multicolumn{12}{|c}{Treatment 2}\\ \hline
+Time  &8&852&52&220&63&8&1976&1296&1460&63&1328&365\\
+Status&0&1  &1 &1  &1 &1&0   &0   &1   &1 &1   &1\\\hline
+\end{tabular}\\[10pt]
+\normalsize
+\vvn\vvn
+The R code {\bf Assignment04ProbIII\_2012.R} provided in Files/Homework Assignments will be very useful in this problem.
+\vvn
+\be
+\item[1.] Estimate the survival function for the two treatments.
+\begin{shaded}
+The survival function is estimated in the {\tt survival} column of the call to {\tt summary}.
+<<>>=
+library(survival)
+T <- c( 180,632,2240, 195,  76,  70, 13,1990, 18,700, 210,1296,  23, 8, 852,  52,
+       220, 63,   8, 1976,1296,1460,63,1328,365)
+
+ST <- c(1,1,1,1,1,1,0,0,1,1,1,1,1,
+       0,1,1,1,1,1,0,0,1,1,1,1)
+G <-  c( 1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2)
+#out <- cbind(T,ST,G)
+#S <- Surv(T, ST)
+#str(S)
+results <- survfit(Surv(T, ST) ~ G)
+@
+\end{shaded}
+
+\begin{shaded}
+<<>>=
+summary(results)
+@
+ 
+\end{shaded}
+\item[2.] Compare the mean and median time to death for the two treatments\begin{shaded}
+Compare the mean and median columns below:
+<<>>=
+print(results, print.rmean=TRUE)
+@
+\end{shaded}
+\item[3.] Which treatment appears to be most effective in the treatment of the skin disease?
+\begin{shaded}
+Treatment 1; both the mean and median time to recovery are less.
+\end{shaded}
+\ee
+\vvn\vvn\vvn
+IV.\ \  (15 points) {\bf Select} the letter of the {\bf BEST} answer. Justify your answer with at most 20 words.
+\vskip2mm
+\noindent
+\small
+\be
+\item[1.] An experiment involves putting specimens of steel under stress until the specimen fractures. The machine increases the
+stress until the specimen fractures. The maximum stress that the machine can place on a specimen is 500 psi. Out of
+the 35 specimens used in the experiment, 5 did not fracture at 500 psi. This type of censoring is called
+\be
+\item[A.] Random censoring
+\begin{shaded}
+\item[B.] Type I censoring\\[5pt]
+{\sl Stress force replaces time; any greater than 500 are censored.}
+\end{shaded}
+\item[C.] Type II censoring
+\item[D.] Left censoring
+\item[E.] Right censoring
+\ee
+\item[2.] A veterinarian  designed a study to determine
+the age at which Labrador retrievers  learned how to swim. There was three groups of puppies:
+\be
+\item[] Group I: Puppies who knew how to swim prior to the beginning of the study;
+\item[] Group II: Puppies who learned how to swim during the study;
+\item[] Group III: Puppies who had not yet learned how to swim at the conclusion of the study.
+\ee
+The age at which each puppy learned how to swim was recorded. The values recorded for the
+Group I puppies are
+\be
+\item[A.] Type I censored
+\item[B.] Type II censored
+\item[C.] Random censored
+\begin{shaded}
+\item[D.] Left censored\\[5pt]
+{\sl Only have upper bound on the age at which swimming was learned.}
+\end{shaded}
+\item[E.] Uncensored
+\ee
+\item[3.]  Refer to Problem 2. The values recorded for the
+Group II puppies are
+\be
+\item[A.] Type I censored
+\item[B.] Type II censored
+\item[C.] Random censored
+\item[D.] Left censored
+\begin{shaded}
+\item[E.] Uncensored\\[5pt]
+{\sl Complete data set.}
+\end{shaded}
+\ee
+\item[4.]  Refer to Problem 2. The values recorded for the
+Group III puppies are
+\be
+\begin{shaded}
+\item[A.] Type I censored\\[5pt]
+{\sl The study ended at $t$; only know that group III has $T > t.$}
+\end{shaded}
+\item[B.] Type II censored
+\item[C.] Random censored
+\item[D.] Left censored
+\item[E.] Uncensored
+\ee
+\item[5.]  An engineer for an automotive manufacturer  is
+studying the occurrence of a defective in the braking system for a newly designed braking system. She randomly selects 100
+automobiles for study and plans to record the distance traveled prior to a failure in the braking system. However, she
+needs to conclude the study 12 months after its inception. For each of the 100 automobiles she recorded the
+mileage at which a failure occurred in the braking system or the mileage driven during the 12 month study for those
+automobiles that did not have a failure. We would describe the data from this type of study as having
+\be
+\begin{shaded}
+\item[A.] Type I censoring\\[5pt]
+{\sl We only know lower bound on those systems that didn't fail at the study completion.}
+\end{shaded}
+\item[B.] Type II censoring
+\item[C.] Random censoring
+\item[D.] Left censoring
+\item[E.] Right censoring
+\ee\ee
+\vvn\vvn\vvn
+V.\ \ Bonus Problem for 5 points (attempt this problem only if you have extra time).
+\vvn
+\be
+\item[]Prove the following statement:
+\vnn
+\item[] If $Y$ has a symmetric distribution with $\mu<\infty$ and median $\tilde{\mu}$,
+\vskip2mm
+then, the median of $W = |Y-\tilde{\mu}|$, equals the SIQR of $Y$.
+\ee
+\vfill
+
+\end{document}

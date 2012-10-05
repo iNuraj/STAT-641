@@ -167,7 +167,9 @@ answer for each question and provide a short explanation for your selection (20 
 \item[B.] the probability density (mass) function, pdf $f(\cdot)$
 \item[C.] the quantile function, $Q(\cdot)$
 \item[D.] the survival function, $S(\cdot)$
+\begin{shaded}
 \item[E.] all the above functions are equivalent
+\end{shaded}
 \ee
 \vvn
 \item[2.]  A relative frequency histogram
@@ -177,7 +179,9 @@ was plotted versus the class intervals. This plot will not be an appropriate
 estimator of the population pdf because
 \be
 \item[A.] all the intervals are not the same width.
+\begin{shaded}
 \item[B.] the area under the curve for each class is not an estimator of the probability of that class.
+\end{shaded}
 \item[C.] the area under the curve is not proportional  to one.
 \item[D.] the relative frequency varies greatly by class width.
 \item[E.] In fact it is an unbiased estimator of the pdf.
@@ -203,9 +207,11 @@ is generally a vastly improved estimator over a relative frequency histogram
 \be
 \item[A.] in using the histogram, it is necessary
   to select the number of bins, bin widths, and their location.
+  \begin{shaded}
 \item[B.] the kernel density estimator makes use of all the data in
   estimating $f(y)$ whereas the histogram only uses those data values
   in the same bin as $y$.
+\end{shaded}
 \item[C.] the area under the curve adds to 1 for the kernel
   density estimator.
 \item[D.] there are too many spurious modes using the histogram
@@ -215,7 +221,9 @@ is generally a vastly improved estimator over a relative frequency histogram
 \item[5.]      A random sample of n data values is obtained from a process having an absolutely continuous cdf of unknown shape. The metallurgist wants to select the best fitting distribution amongst several candidate cdfs. She decides to select the distribution which has mean and variance most closely matching the corresponding sample mean and variance. The major weakness in this approach is
 \be
 \item[A.] the mean and variance may be highly inflated by outliers
+\begin{shaded}
 \item[B.] there are many  distribution having the same mean and variance but very different shapes
+\end{shaded}
 \item[C.] she should have used robust estimators of the location and scale parameters
 \item[D.] the empirical distribution function contains more information about the tails of the distribution than does the mean and variance
 \item[E.] the moments of a distribution determine the distribution, hence
@@ -225,7 +233,9 @@ there is no weakness in the approach
 \be
 \item[A.] the center and spread in the distribution
 \item[B.] the heaviness of the tails and deviation from normality of the distribution
+\begin{shaded}
 \item[C.] the deviation from symmetry and concentration in the tails of the distribution
+\ebd{shaded}
 \item[D.] the deviation from symmetry and concentration in the tails and/or the peakedness of the distribution
 \item[E.] none of the above
 \ee
@@ -233,7 +243,9 @@ there is no weakness in the approach
   level of trimming equal to
 \be
 \item[A.] 0\%
+\begin{shaded}
 \item[B.] 50\%
+\end{shaded}
 \item[C.] 25\%
 \item[D.] 75\%
 \item[E.] none of the above
@@ -242,7 +254,9 @@ there is no weakness in the approach
 to MAD as a measure of population dispersion when the population
 distribution
 \be
+\begin{shaded}
 \item[A.] has absolutely no outliers.
+\end{shaded}
 \item[B.] has a normal distribution.
 \item[C.] has a lognormal distribution.
 \item[D.] has a skewed but short-tailed distribution.
@@ -257,6 +271,7 @@ distribution
 \item[B.] $SIQR$ is preferred to $MAD$ if the distribution has very heavy tails
 \item[C.] For the normal distribution, $SIQR$ is preferred to $MAD$
 \item[D.] all of the above
+
 \item[E.] none of the above
 \ee
 \item[10.]  A government study of the average monthly nitrate levels in the Mississippi river, $N_t$, just prior to its entry into the Gulf of Mexico is modeled as
