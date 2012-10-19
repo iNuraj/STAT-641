@@ -1,0 +1,15 @@
+fitdistrplus
+survival
+splines
+codetools
+ggplot2
+MASS
+plyr
+knitr
+stats
+graphics
+grDevices
+utils
+datasets
+methods
+base
